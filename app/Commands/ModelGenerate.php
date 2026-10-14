@@ -29,7 +29,7 @@ class ModelGenerate extends BaseCommand
 
     // Mapping rules for the target sql: model type => SQL type
     private array $sqlTypes = [
-        'text'         => 'VARCHAR(255)',
+        'text'         => 'VARCHAR(100)',
         'longtext'     => 'TEXT',
         'wholenumber'  => 'INT',
         'decimal'      => 'DECIMAL(10,2)',
