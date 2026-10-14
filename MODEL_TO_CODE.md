@@ -1,0 +1,6 @@
+# From model to code
+
+1. The model is `app/PIM/weather_reading.json`. It is platform independent because it only describes the `WeatherReading` concept with abstract field types such as `text`, `longtext`, `decimal`, `wholenumber`, `datetime`, and `yesno`, with no database or CodeIgniter-specific words.
+2. `php spark model:generate ... ci4` generates `app/Database/Migrations/2026-10-14-153033_CreateWeatherReadingTable.php` and `app/Models/WeatherReadingModel.php`, while `php spark model:generate ... sql` generates `writable/generated/weather_readings.sql`.
+3. In `app/Commands/ModelGenerate.php`, the rule `'text' => ['VARCHAR', 255]` in `$ci4Types` turns `city` into `city => ['type' => 'VARCHAR', 'constraint' => 255, 'null' => false]`, and after the Part 4 change the rule `'text' => 'VARCHAR(100)'` in `$sqlTypes` turns `city` into `city VARCHAR(100) NOT NULL`.
+4. To produce code for a different platform, I would add a new mapping list and output branch in `app/Commands/ModelGenerate.php` while leaving `app/PIM/weather_reading.json` unchanged.
