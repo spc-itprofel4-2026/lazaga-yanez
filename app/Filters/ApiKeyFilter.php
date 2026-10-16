@@ -16,7 +16,7 @@ class ApiKeyFilter implements FilterInterface
 
         if ($expected === '') {
             return Services::response()->setStatusCode(401)->setJSON([
-                'status' => 'error',
+                'status' => 401,
                 'error'  => [
                     'code'    => 'unauthorized',
                     'message' => 'API key is not configured.',
@@ -28,7 +28,7 @@ class ApiKeyFilter implements FilterInterface
 
         if ($provided === '' || ! hash_equals($expected, $provided)) {
             return Services::response()->setStatusCode(401)->setJSON([
-                'status' => 'error',
+                'status' => 401,
                 'error'  => [
                     'code'    => 'unauthorized',
                     'message' => 'A valid API key is required.',
